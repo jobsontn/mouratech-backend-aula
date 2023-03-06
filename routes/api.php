@@ -24,8 +24,9 @@ Route::middleware('auth:sanctum')->group(function (){
     Route::get('/user', function (Request $request) {
         return $request->user();
     });
-    Route::apiResource('students', StudentController::class);
+    //Route::apiResource('students', StudentController::class);
     Route::apiResource('tokens', TokenController::class)->only(['store', 'destroy']);
 });
 
-// Route::apiResource('students', StudentController::class);
+
+Route::apiResource('students', StudentController::class);

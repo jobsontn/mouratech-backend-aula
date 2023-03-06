@@ -12,7 +12,26 @@ use Illuminate\Http\Request;
 class StudentController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     *  @OA\Get(
+     *      tags={"/students"},
+     *      summary="Listar todos os estudantes.",
+     *      description="Retorna todos os estudantes de forma paginada.",
+     *      path="/students",
+     *      security={{"bearerAuth": {}}},
+     *      @OA\Parameter(
+     *          name="page",
+     *          required=true,
+     *          in="query",
+     *          description="Número da página",
+     *          @OA\Schema(type="integer"),
+     *          style="form"
+     *      ),
+     *      @OA\Response(
+     *          response="200", description="Lista de estudantes."
+     *      ),
+     *  )
+     * 
+     * @return StudentCollection
      */
     public function index()
     {
@@ -20,7 +39,38 @@ class StudentController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     *  @OA\Post(
+     *      tags={"/students"},
+     *      summary="Cria um estudante.",
+     *      description="Cria um novo estudante e persiste no banco de dados.",
+     *      path="/students",
+     *      security={{"bearerAuth": {}}},
+     *      @OA\RequestBody(
+     *          required=true,
+     *          @OA\JsonContent(
+     *              type="object",
+     *              @OA\Property(property="enrollment", type="string"),
+     *              @OA\Property(property="CPF", type="string"),
+     *              @OA\Property(property="name", type="string"),
+     *              @OA\Property(property="motherName", type="string"),
+     *              @OA\Property(property="fatherName", type="string"),
+     *              @OA\Property(property="birthday", type="string"),
+     *              @OA\Property(property="gender", type="string"),
+     *              @OA\Property(property="email", type="string"),
+     *              @OA\Property(property="cellphone", type="string"),
+     *              @OA\Property(property="githubProfile", type="string"),
+     *              @OA\Property(property="campusName", type="string"),
+     *              @OA\Property(property="courseName", type="string"),
+     *              @OA\Property(property="currentPeriod", type="integer"),
+     *              @OA\Property(property="group", type="integer"),
+     *          ),
+     *      ),
+     *      @OA\Response(
+     *          response="201", description="Novo estudante criado."
+     *      ),
+     *  )
+     * 
+     * @return StudentResource
      */
     public function store(StudentStoreRequest $request)
     {
@@ -29,7 +79,26 @@ class StudentController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     *  @OA\Get(
+     *      tags={"/students"},
+     *      summary="Exibe um estudante.",
+     *      description="Exibe um estudante a partir do seu ID.",
+     *      path="/students/{id}",
+     *      security={{"bearerAuth": {}}},
+     *      @OA\Parameter(
+     *          name="id",
+     *          required=true,
+     *          in="path",
+     *          description="Id do estudante",
+     *          @OA\Schema(type="integer"),
+     *      ),
+     *      @OA\Response(
+     *          response="200", description="Dados do estudante."
+     *      ),
+     *  )
+     * 
+     * @param integer $id
+     * @return StudentResource
      */
     public function show(Student $student)
     {
@@ -37,7 +106,45 @@ class StudentController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     *  @OA\Put(
+     *      tags={"/students"},
+     *      summary="Alterar um estudante.",
+     *      description="Altera um estudante e persiste no banco de dados.",
+     *      path="/students/{id}",
+     *      security={{"bearerAuth": {}}},
+     *      @OA\Parameter(
+     *          name="id",
+     *          required=true,
+     *          in="path",
+     *          description="Id do estudante",
+     *          @OA\Schema(type="integer"),
+     *      ),
+     *      @OA\RequestBody(
+     *          required=true,
+     *          @OA\JsonContent(
+     *              type="object",
+     *              @OA\Property(property="enrollment", type="string"),
+     *              @OA\Property(property="CPF", type="string"),
+     *              @OA\Property(property="name", type="string"),
+     *              @OA\Property(property="motherName", type="string"),
+     *              @OA\Property(property="fatherName", type="string"),
+     *              @OA\Property(property="birthday", type="string"),
+     *              @OA\Property(property="gender", type="string"),
+     *              @OA\Property(property="email", type="string"),
+     *              @OA\Property(property="cellphone", type="string"),
+     *              @OA\Property(property="githubProfile", type="string"),
+     *              @OA\Property(property="campusName", type="string"),
+     *              @OA\Property(property="courseName", type="string"),
+     *              @OA\Property(property="currentPeriod", type="integer"),
+     *              @OA\Property(property="group", type="integer"),
+     *          ),
+     *      ),
+     *      @OA\Response(
+     *          response="200", description="Estudante alterado."
+     *      ),
+     *  )
+     * 
+     * @return StudentResource
      */
     public function update(StudentUpdateRequest $request, Student $student)
     {
@@ -46,7 +153,25 @@ class StudentController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     *  @OA\Delete(
+     *      tags={"/students"},
+     *      summary="Remove um estudante.",
+     *      description="Remove um estudante e o exclui do banco de dados.",
+     *      path="/students/{id}",
+     *      security={{"bearerAuth": {}}},
+     *      @OA\Parameter(
+     *          name="id",
+     *          required=true,
+     *          in="path",
+     *          description="Id do estudante",
+     *          @OA\Schema(type="integer"),
+     *      ),
+     *      @OA\Response(
+     *          response="204", description="Estudante excluído."
+     *      ),
+     *  )
+     * 
+     * @return null
      */
     public function destroy(Student $student)
     {

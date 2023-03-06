@@ -10,5 +10,9 @@ API desenvolvida usando o framework [Laravel](https://laravel.com/) para demosnt
 **OBSERVAÇÃO:** Os dados da API não são reais e foram gerados usando a biblioteca [FakerPHP/Faker](https://fakerphp.github.io/).
 
 <p align="center">
-    <img src="public/tests.png" alt="Logo Moura Tech"><br>
+    <img src="public/tests.png" alt="Testes"><br>
+</p>
+
+<p align="center">
+    <img src="public/students.png" alt="API CRUD Students"><br>
 </p>

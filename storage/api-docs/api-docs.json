@@ -1,0 +1,264 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API Moura Tech (Uso Educacional)",
+        "contact": {
+            "email": "jobsontenorio@gmail.com"
+        },
+        "version": "0.0.1"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:8000/api/"
+        }
+    ],
+    "paths": {
+        "/students": {
+            "get": {
+                "tags": [
+                    "/students"
+                ],
+                "summary": "Listar todos os estudantes.",
+                "description": "Retorna todos os estudantes de forma paginada.",
+                "operationId": "7c586e93df821205d2c5af51e9dfd6d2",
+                "parameters": [
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Número da página",
+                        "required": true,
+                        "style": "form",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Lista de estudantes."
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "/students"
+                ],
+                "summary": "Cria um estudante.",
+                "description": "Cria um novo estudante e persiste no banco de dados.",
+                "operationId": "9e62661a4847ad2a4c15519a535ad5aa",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "enrollment": {
+                                        "type": "string"
+                                    },
+                                    "CPF": {
+                                        "type": "string"
+                                    },
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "motherName": {
+                                        "type": "string"
+                                    },
+                                    "fatherName": {
+                                        "type": "string"
+                                    },
+                                    "birthday": {
+                                        "type": "string"
+                                    },
+                                    "gender": {
+                                        "type": "string"
+                                    },
+                                    "email": {
+                                        "type": "string"
+                                    },
+                                    "cellphone": {
+                                        "type": "string"
+                                    },
+                                    "githubProfile": {
+                                        "type": "string"
+                                    },
+                                    "campusName": {
+                                        "type": "string"
+                                    },
+                                    "courseName": {
+                                        "type": "string"
+                                    },
+                                    "currentPeriod": {
+                                        "type": "integer"
+                                    },
+                                    "group": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Novo estudante criado."
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/students/{id}": {
+            "get": {
+                "tags": [
+                    "/students"
+                ],
+                "summary": "Exibe um estudante.",
+                "description": "Exibe um estudante a partir do seu ID.",
+                "operationId": "8b4ba20f528dd1c1b78cbbb5950dfc15",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id do estudante",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Dados do estudante."
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "/students"
+                ],
+                "summary": "Alterar um estudante.",
+                "description": "Altera um estudante e persiste no banco de dados.",
+                "operationId": "df614f464255b5d0abc841caecc0ba78",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id do estudante",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "enrollment": {
+                                        "type": "string"
+                                    },
+                                    "CPF": {
+                                        "type": "string"
+                                    },
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "motherName": {
+                                        "type": "string"
+                                    },
+                                    "fatherName": {
+                                        "type": "string"
+                                    },
+                                    "birthday": {
+                                        "type": "string"
+                                    },
+                                    "gender": {
+                                        "type": "string"
+                                    },
+                                    "email": {
+                                        "type": "string"
+                                    },
+                                    "cellphone": {
+                                        "type": "string"
+                                    },
+                                    "githubProfile": {
+                                        "type": "string"
+                                    },
+                                    "campusName": {
+                                        "type": "string"
+                                    },
+                                    "courseName": {
+                                        "type": "string"
+                                    },
+                                    "currentPeriod": {
+                                        "type": "integer"
+                                    },
+                                    "group": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Estudante alterado."
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "/students"
+                ],
+                "summary": "Remove um estudante.",
+                "description": "Remove um estudante e o exclui do banco de dados.",
+                "operationId": "8b7dedcaa57ee3874f0220652271d1a7",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id do estudante",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Estudante excluído."
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        }
+    }
+}
