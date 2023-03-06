@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use DateTime;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -12,7 +14,7 @@ class Student extends Model
     protected $fillable = [
         'enrollment',
         'CPF',
-        'Name',
+        'name',
         'motherName',
         'fatherName',
         'birthday',
@@ -25,4 +27,9 @@ class Student extends Model
         'currentPeriod',
         'group',
     ];
+
+    protected $guarded = [
+        'id',
+    ];
+
 }

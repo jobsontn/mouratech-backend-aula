@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StudentStoreRequest;
+use App\Http\Requests\StudentUpdateRequest;
+use App\Http\Resources\StudentCollection;
 use App\Models\Student;
-use Illuminate\Http\Request;
 
 class StudentController extends Controller
 {
@@ -12,15 +14,16 @@ class StudentController extends Controller
      */
     public function index()
     {
-        return Student::paginate();
+        return new StudentCollection(Student::paginate());
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StudentStoreRequest $request)
     {
-        //
+        $student = Student::create($request->validated());
+        return $student;
     }
 
     /**
@@ -28,15 +31,16 @@ class StudentController extends Controller
      */
     public function show(Student $student)
     {
-        //
+        return $student;
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Student $student)
+    public function update(StudentUpdateRequest $request, Student $student)
     {
-        //
+        $student->update($request->validated());
+        return $student;
     }
 
     /**
@@ -44,6 +48,7 @@ class StudentController extends Controller
      */
     public function destroy(Student $student)
     {
-        //
+        $student->delete();
+        return response()->json(null, 204);
     }
 }

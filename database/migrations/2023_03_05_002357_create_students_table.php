@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('enrollment', 30)->unique();
             $table->string('CPF', 14)->unique();
-			$table->string('Name');
+			$table->string('name');
             $table->string('motherName');
             $table->string('fatherName')->nullable();
             $table->date('birthday');
