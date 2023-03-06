@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StudentStoreRequest;
 use App\Http\Requests\StudentUpdateRequest;
 use App\Http\Resources\StudentCollection;
+use App\Http\Resources\StudentResource;
 use App\Models\Student;
+use Illuminate\Http\Request;
 
 class StudentController extends Controller
 {
@@ -23,7 +25,7 @@ class StudentController extends Controller
     public function store(StudentStoreRequest $request)
     {
         $student = Student::create($request->validated());
-        return $student;
+        return new StudentResource($student);
     }
 
     /**
@@ -31,7 +33,7 @@ class StudentController extends Controller
      */
     public function show(Student $student)
     {
-        return $student;
+        return new StudentResource($student);
     }
 
     /**
@@ -40,7 +42,7 @@ class StudentController extends Controller
     public function update(StudentUpdateRequest $request, Student $student)
     {
         $student->update($request->validated());
-        return $student;
+        return new StudentResource($student);
     }
 
     /**

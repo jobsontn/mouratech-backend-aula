@@ -49,10 +49,14 @@ class StudentTest extends TestCase
         $student = Student::factory()->create();
         // Act
         $response = $this->json('GET', route('students.show', $student));
+        // dd($student->toArray(), $response->json());
         // Assert
         $response
             ->assertOk()
-            ->assertJson($student->toArray());
+            ->assertJsonPath('data.enrollment',$student->enrollment)
+            ->assertJsonPath('data.CPF',$student->CPF)
+            ->assertJsonPath('data.name',$student->name);
+            //->assertJson($student->toArray());
     }
 
     public function test_update_one_student(){
