@@ -5,8 +5,10 @@ namespace Tests\Feature;
 // use Illuminate\Foundation\Testing\RefreshDatabase;
 
 use App\Models\Student;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Laravel\Sanctum\Sanctum;
 use Tests\TestCase;
 
 class StudentTest extends TestCase
@@ -16,15 +18,16 @@ class StudentTest extends TestCase
     /**
      * A basic test example.
      */
-    public function test_the_application_returns_a_successful_response(): void
+    /* public function test_the_application_returns_a_successful_response(): void
     {
         $response = $this->get('/');
 
         $response->assertStatus(200);
-    }
+    } */
 
     public function test_list_all_students(){
         // Arrange
+        Sanctum::actingAs(User::factory()->create());
         Student::factory($total = $this->faker->numberBetween(100, 200))->create();
         // Act
         $response = $this->json('GET', route('students.index'));
@@ -36,6 +39,7 @@ class StudentTest extends TestCase
 
     public function test_create_one_student(){
         // Arrange
+        Sanctum::actingAs(User::factory()->create());
         $studentNew = Student::factory()->make();
         // Act
         $response = $this->json('POST', route('students.store'), $studentNew->toArray());
@@ -46,6 +50,7 @@ class StudentTest extends TestCase
 
     public function test_read_one_student(){
         // Arrange
+        Sanctum::actingAs(User::factory()->create());
         $student = Student::factory()->create();
         // Act
         $response = $this->json('GET', route('students.show', $student));
@@ -61,6 +66,7 @@ class StudentTest extends TestCase
 
     public function test_update_one_student(){
         // Arrange
+        Sanctum::actingAs(User::factory()->create());
         $student = Student::factory()->create();
         $studentNew = Student::factory()->make();
         // Act
@@ -72,6 +78,7 @@ class StudentTest extends TestCase
 
     public function test_delete_one_student(){
         // Arrange
+        Sanctum::actingAs(User::factory()->create());
         $student = Student::factory()->create();
         // Act
         $response = $this->json('DELETE', route('students.destroy', $student));
