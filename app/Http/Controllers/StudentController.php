@@ -7,7 +7,6 @@ use App\Http\Requests\StudentUpdateRequest;
 use App\Http\Resources\StudentCollection;
 use App\Http\Resources\StudentResource;
 use App\Models\Student;
-use Illuminate\Http\Request;
 
 class StudentController extends Controller
 {
@@ -20,7 +19,7 @@ class StudentController extends Controller
      *      security={{"bearerAuth": {}}},
      *      @OA\Parameter(
      *          name="page",
-     *          required=true,
+     *          required=false,
      *          in="query",
      *          description="Número da página",
      *          @OA\Schema(type="integer"),
@@ -30,7 +29,7 @@ class StudentController extends Controller
      *          response="200", description="Lista de estudantes."
      *      ),
      *  )
-     * 
+     *
      * @return StudentCollection
      */
     public function index()
@@ -69,7 +68,7 @@ class StudentController extends Controller
      *          response="201", description="Novo estudante criado."
      *      ),
      *  )
-     * 
+     *
      * @return StudentResource
      */
     public function store(StudentStoreRequest $request)
@@ -96,7 +95,7 @@ class StudentController extends Controller
      *          response="200", description="Dados do estudante."
      *      ),
      *  )
-     * 
+     *
      * @param integer $id
      * @return StudentResource
      */
@@ -143,7 +142,7 @@ class StudentController extends Controller
      *          response="200", description="Estudante alterado."
      *      ),
      *  )
-     * 
+     *
      * @return StudentResource
      */
     public function update(StudentUpdateRequest $request, Student $student)
@@ -170,7 +169,7 @@ class StudentController extends Controller
      *          response="204", description="Estudante excluído."
      *      ),
      *  )
-     * 
+     *
      * @return null
      */
     public function destroy(Student $student)

@@ -15,6 +15,11 @@ use Illuminate\Routing\Controller as BaseController;
  *          email="jobsontenorio@gmail.com"
  *      ),
  *  ),
+ *  *  @OA\SecurityScheme(
+ *      type="http",
+ *      scheme="bearer",
+ *      securityScheme="bearerAuth"
+ *  ),
  */
 
 class Controller extends BaseController

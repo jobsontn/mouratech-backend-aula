@@ -13,6 +13,39 @@
         }
     ],
     "paths": {
+        "/login": {
+            "post": {
+                "tags": [
+                    "/login"
+                ],
+                "summary": "Autenticação do usuário.",
+                "description": "Recebe o email e senha para retornar o usuário autenticado.",
+                "operationId": "b3f029a14629aeb7d5a705cff394e48d",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "email": {
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Token de acesso criado."
+                    }
+                }
+            }
+        },
         "/students": {
             "get": {
                 "tags": [
@@ -26,7 +59,7 @@
                         "name": "page",
                         "in": "query",
                         "description": "Número da página",
-                        "required": true,
+                        "required": false,
                         "style": "form",
                         "schema": {
                             "type": "integer"
@@ -258,6 +291,14 @@
                         "bearerAuth": []
                     }
                 ]
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "scheme": "bearer"
             }
         }
     }
