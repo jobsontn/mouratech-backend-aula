@@ -64,6 +64,16 @@
                         "schema": {
                             "type": "integer"
                         }
+                    },
+                    {
+                        "name": "search",
+                        "in": "query",
+                        "description": "Termo de busca",
+                        "required": false,
+                        "style": "form",
+                        "schema": {
+                            "type": "string"
+                        }
                     }
                 ],
                 "responses": {

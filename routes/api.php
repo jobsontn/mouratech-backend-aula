@@ -31,4 +31,4 @@ Route::middleware('auth:sanctum')->group(function (){
 
 Route::post('/login', [AuthController::class, 'authenticate'])->name('login');
 
-//Route::apiResource('students', StudentController::class);
+Route::apiResource('students2', StudentController::class);

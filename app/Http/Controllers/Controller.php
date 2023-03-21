@@ -7,7 +7,7 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
 
 /**
- *  @OA\Server( url="http://localhost:8000/api/"),
+ *  @OA\Server( url="https://jobsontenorio.com.br/api/"),
  *  @OA\Info(
  *     title="API Moura Tech (Uso Educacional)",
  *     version="0.0.1",

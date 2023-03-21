@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use App\Http\Requests\StudentStoreRequest;
 use App\Http\Requests\StudentUpdateRequest;
 use App\Http\Resources\StudentCollection;
@@ -25,6 +27,14 @@ class StudentController extends Controller
      *          @OA\Schema(type="integer"),
      *          style="form"
      *      ),
+*          @OA\Parameter(
+     *          name="search",
+     *          required=false,
+     *          in="query",
+     *          description="Termo de busca",
+     *          @OA\Schema(type="string"),
+     *          style="form"
+     *      ),
      *      @OA\Response(
      *          response="200", description="Lista de estudantes."
      *      ),
@@ -32,8 +42,33 @@ class StudentController extends Controller
      *
      * @return StudentCollection
      */
-    public function index()
+    public function index(Request $request)
     {
+
+        $validator = Validator::make($request->all(), [
+            'search' => 'string|nullable',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(["message", "Bad Request"], 400);
+        }
+
+
+        if ($request->search) {
+            return new StudentCollection(
+                Student::where('enrollment', 'like', '%' . $request->search . '%')
+                    ->orWhere('CPF', 'like', '%' . $request->search . '%')
+                    ->orWhere('name', 'like', '%' . $request->search . '%')
+                    ->orWhere('birthday', 'like', '%' . $request->search . '%')
+                    ->orWhere('gender', 'like', '%' . $request->search . '%')
+                    ->orWhere('email', 'like', '%' . $request->search . '%')
+                    ->orWhere('cellphone', 'like', '%' . $request->search . '%')
+                    ->orWhere('githubProfile', 'like', '%' . $request->search . '%')
+                    ->orWhere('campusName', 'like', '%' . $request->search . '%')
+                    ->orWhere('courseName', 'like', '%' . $request->search . '%')
+                    ->paginate());
+        }
+
         return new StudentCollection(Student::paginate());
     }
 
